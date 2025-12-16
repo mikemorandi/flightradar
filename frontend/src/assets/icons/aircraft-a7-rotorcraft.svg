@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px" viewBox="0 0 15 20">
+  <!-- A7: Rotorcraft - Helicopter -->
+  <g fill="rgb(250, 255, 255)" stroke="black" stroke-width="0.8">
+    <!-- Main rotor (spinning blades) -->
+    <line x1="1" y1="3" x2="14" y2="3" stroke-width="1.2" />
+    <line x1="7.5" y1="0.5" x2="7.5" y2="5.5" stroke-width="0.6" />
+    <!-- Rotor hub -->
+    <circle cx="7.5" cy="3" r="1.2" />
+    <!-- Fuselage (rounded) -->
+    <ellipse cx="7.5" cy="9" rx="3" ry="5" />
+    <!-- Cockpit bubble -->
+    <path d="M 5.5,7 Q 7.5,5.5 9.5,7" fill="none" stroke-width="0.8" />
+    <!-- Landing skids -->
+    <path d="M 4,13 L 3.5,15 L 3,16.5" fill="none" stroke-width="1" stroke-linecap="round" />
+    <path d="M 11,13 L 11.5,15 L 12,16.5" fill="none" stroke-width="1" stroke-linecap="round" />
+    <line x1="3" y1="16.5" x2="12" y2="16.5" stroke-width="1.2" />
+    <!-- Tail boom -->
+    <rect x="7" y="13" width="1" height="5" />
+    <!-- Tail rotor -->
+    <circle cx="7.5" cy="19" r="1" fill="none" />
+    <line x1="6.5" y1="19" x2="8.5" y2="19" stroke-width="0.8" />
+  </g>
+</svg>
