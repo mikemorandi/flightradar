@@ -1,6 +1,12 @@
 // This file contains elements for aircraft visualization
 import { HereCoordinates } from './flightPath';
 import { AircraftInterpolator } from './AircraftInterpolator';
+import {
+  type AircraftCategory,
+  loadIconSvg,
+  determineAircraftCategory,
+  updateSvgColor
+} from '@/utils/aircraftIcons';
 
 // Here Maps API interfaces
 interface HereMarker {
@@ -34,6 +40,7 @@ export class AircraftIcon {
   constructor(
     private iconSvgMap: Map<string, SVGElement>,
     private callsignMap: Map<string, string> = new Map(),
+    private aircraftTypeMap: Map<string, AircraftCategory> = new Map(),
   ) {
     const aircraftDomIconElement = document.createElement('div');
     aircraftDomIconElement.className = 'aircraft-icon-wrapper';
@@ -104,6 +111,14 @@ export class AircraftIcon {
   public setCallsign(flightId: string, callsign: string) {
     this.callsignMap.set(flightId, callsign);
   }
+
+  public setAircraftType(flightId: string, category: AircraftCategory) {
+    this.aircraftTypeMap.set(flightId, category);
+  }
+
+  public getAircraftType(flightId: string): AircraftCategory {
+    return this.aircraftTypeMap.get(flightId) || 'default';
+  }
 }
 
 export class AircraftMarker {
@@ -114,6 +129,8 @@ export class AircraftMarker {
   private isAnimating: boolean = false;
   private lastRenderedPosition: HereCoordinates | null = null;
   private callsign: string | undefined;
+  private aircraftType: string | undefined;
+  private icaoType: string | undefined;
   private lastFrameTime: number = 0;
   private readonly TARGET_FPS = 25;
 
@@ -124,12 +141,20 @@ export class AircraftMarker {
     private map: { addObject: (marker: HereMarker) => void; removeObject: (marker: HereMarker) => void },
     private iconSvgMap: Map<string, SVGElement>,
     callsign?: string,
+    aircraftType?: string,
+    icaoType?: string,
   ) {
     this.callsign = callsign;
+    this.aircraftType = aircraftType;
+    this.icaoType = icaoType;
 
     if (callsign) {
       this.aircraftIcon.setCallsign(flightId, callsign);
     }
+
+    // Determine and set the aircraft category
+    const category = determineAircraftCategory(aircraftType, icaoType);
+    this.aircraftIcon.setAircraftType(flightId, category);
 
     this.marker = new H.map.DomMarker(coords, { icon: this.aircraftIcon.hereIcon, data: flightId });
     this.map.addObject(this.marker);
@@ -137,6 +162,51 @@ export class AircraftMarker {
     this.interpolator = new AircraftInterpolator();
 
     this.interpolator.addPositionUpdate(coords);
+
+    // Load the appropriate icon after marker is created
+    this.loadAircraftIcon(category);
+  }
+
+  private async loadAircraftIcon(category: AircraftCategory) {
+    try {
+      const svgContent = await loadIconSvg(category);
+
+      // Get the SVG element for this marker
+      const svgElement = this.iconSvgMap.get(this.flightId);
+      if (svgElement && svgElement.parentElement) {
+        // Parse the new SVG content
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgContent, 'image/svg+xml');
+        const newSvg = doc.querySelector('svg');
+
+        if (newSvg) {
+          // Apply current fill color
+          const fillableElements = newSvg.querySelectorAll('[fill]');
+          fillableElements.forEach(element => {
+            const currentFill = element.getAttribute('fill');
+            if (currentFill && currentFill !== 'none' && !currentFill.includes('url(')) {
+              element.setAttribute('fill', `rgb(${AircraftIcon.INACTIVE_COLOR})`);
+            }
+          });
+
+          // Preserve the current rotation if any
+          const currentTransform = svgElement.style.transform;
+
+          // Replace the SVG element
+          svgElement.parentElement.replaceChild(newSvg, svgElement);
+
+          // Update the map reference
+          this.iconSvgMap.set(this.flightId, newSvg as unknown as SVGElement);
+
+          // Restore rotation
+          if (currentTransform) {
+            (newSvg as unknown as SVGElement).style.transform = currentTransform;
+          }
+        }
+      }
+    } catch (error) {
+      console.error(`Failed to load icon for aircraft ${this.flightId}:`, error);
+    }
   }
 
   public get hereMarker() {
@@ -216,10 +286,8 @@ export class AircraftMarker {
   public setColor(rgbString: string) {
     const iconSvg = this.iconSvgMap.get(this.flightId);
     if (iconSvg) {
-      const polygon = iconSvg.getElementsByTagName('polygon')[0];
-      if (polygon) {
-        polygon.setAttribute('fill', `rgb(${rgbString})`);
-      }
+      // Update all fillable elements (works with any SVG structure)
+      updateSvgColor(iconSvg, rgbString);
     }
   }
 
@@ -235,6 +303,25 @@ export class AircraftMarker {
           popover.textContent = callsign;
         }
       }
+    }
+  }
+
+  public updateAircraftType(aircraftType?: string, icaoType?: string) {
+    // Only update if the type has changed
+    if (this.aircraftType === aircraftType && this.icaoType === icaoType) {
+      return;
+    }
+
+    this.aircraftType = aircraftType;
+    this.icaoType = icaoType;
+
+    const category = determineAircraftCategory(aircraftType, icaoType);
+    const currentCategory = this.aircraftIcon.getAircraftType(this.flightId);
+
+    // Only reload icon if category changed
+    if (category !== currentCategory) {
+      this.aircraftIcon.setAircraftType(this.flightId, category);
+      this.loadAircraftIcon(category);
     }
   }
 

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px" viewBox="0 0 15 20">
+  <!-- A3: Large Aircraft (75,000 - 300,000 lbs) - Commercial airliner -->
+  <g fill="rgb(250, 255, 255)" stroke="black" stroke-width="0.8">
+    <!-- Fuselage (wider) -->
+    <path d="M 7.5,0 L 9.5,6 L 9.5,14 L 7.5,16.5 L 5.5,14 L 5.5,6 Z" />
+    <!-- Wings (swept back) -->
+    <path d="M 0.5,8 L 5.5,7 L 5.5,10 L 2,11 Z" />
+    <path d="M 14.5,8 L 9.5,7 L 9.5,10 L 13,11 Z" />
+    <!-- Wing-mounted engines -->
+    <ellipse cx="2.5" cy="9" rx="1.2" ry="2" />
+    <ellipse cx="12.5" cy="9" rx="1.2" ry="2" />
+    <!-- Horizontal stabilizer -->
+    <rect x="4" y="14" width="7" height="1.5" />
+    <!-- Vertical stabilizer (taller) -->
+    <path d="M 6.5,14.5 L 7.5,19.5 L 8.5,14.5 Z" />
+  </g>
+</svg>

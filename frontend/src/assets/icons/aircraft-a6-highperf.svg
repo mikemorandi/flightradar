@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px" viewBox="0 0 15 20">
+  <!-- A6: High Performance (> 5g, > 400 kts) - Fighter jet profile -->
+  <g fill="rgb(250, 255, 255)" stroke="black" stroke-width="0.8">
+    <!-- Fuselage (sleek, pointed) -->
+    <path d="M 7.5,0 L 9,5 L 8.5,14 L 7.5,15.5 L 6.5,14 L 6,5 Z" />
+    <!-- Delta wings (swept back aggressively) -->
+    <path d="M 1,10 L 6,6 L 6.5,11 L 3,13 Z" />
+    <path d="M 14,10 L 9,6 L 8.5,11 L 12,13 Z" />
+    <!-- Canards (front wings) -->
+    <line x1="5" y1="4" x2="2" y2="5" stroke-width="1" />
+    <line x1="10" y1="4" x2="13" y2="5" stroke-width="1" />
+    <!-- Tail fins (twin vertical stabilizers) -->
+    <path d="M 6,13 L 5.5,18 L 6.5,14 Z" />
+    <path d="M 9,13 L 9.5,18 L 8.5,14 Z" />
+    <!-- Horizontal stabilizer -->
+    <line x1="5" y1="14" x2="10" y2="14" stroke-width="1.2" />
+    <!-- Afterburner indicator -->
+    <circle cx="7.5" cy="15.5" r="0.8" fill="none" stroke-width="0.6" />
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px" viewBox="0 0 15 20">
+  <!-- A1: Light Aircraft (< 15,500 lbs) - Small single-engine prop plane -->
+  <g fill="rgb(250, 255, 255)" stroke="black" stroke-width="0.8">
+    <!-- Fuselage -->
+    <path d="M 7.5,1 L 8.5,8 L 8.5,16 L 7.5,17 L 6.5,16 L 6.5,8 Z" />
+    <!-- Wings (small) -->
+    <rect x="2" y="8" width="11" height="2" />
+    <!-- Tail -->
+    <path d="M 6.5,16 L 4,18 L 6.5,18 Z" />
+    <path d="M 8.5,16 L 11,18 L 8.5,18 Z" />
+    <!-- Vertical stabilizer -->
+    <path d="M 7,16 L 7.5,19 L 8,16 Z" />
+  </g>
+</svg>

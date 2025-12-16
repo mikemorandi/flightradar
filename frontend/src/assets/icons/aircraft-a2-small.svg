@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px" viewBox="0 0 15 20">
+  <!-- A2: Small Aircraft (15,500 - 75,000 lbs) - Twin-engine regional -->
+  <g fill="rgb(250, 255, 255)" stroke="black" stroke-width="0.8">
+    <!-- Fuselage -->
+    <path d="M 7.5,0.5 L 9,7 L 9,15 L 7.5,17 L 6,15 L 6,7 Z" />
+    <!-- Wings -->
+    <rect x="1" y="7" width="13" height="2.5" rx="0.5" />
+    <!-- Engines on wings -->
+    <ellipse cx="3.5" cy="8.2" rx="1" ry="1.5" />
+    <ellipse cx="11.5" cy="8.2" rx="1" ry="1.5" />
+    <!-- Horizontal stabilizer -->
+    <rect x="4" y="15" width="7" height="1.5" />
+    <!-- Vertical stabilizer -->
+    <path d="M 6.5,15 L 7.5,19.5 L 8.5,15 Z" />
+  </g>
+</svg>
