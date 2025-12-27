@@ -20,6 +20,45 @@ export const AIRCRAFT_CATEGORIES = {
   default: 'Unknown'
 } as const;
 
+/**
+ * Map ADS-B protobuf category enum values to icon categories
+ * Based on the AircraftCategory enum in adsb.proto
+ */
+export function mapProtobufCategoryToIcon(protoCategory?: number): AircraftCategory {
+  if (!protoCategory) return 'default';
+
+  switch (protoCategory) {
+    case 2:  // AIRCRAFT_CATEGORY_LIGHT
+      return 'A1';
+    case 3:  // AIRCRAFT_CATEGORY_MEDIUM_1
+      return 'A2';
+    case 4:  // AIRCRAFT_CATEGORY_MEDIUM_2
+      return 'A3';
+    case 5:  // AIRCRAFT_CATEGORY_HIGH_VORTEX_LARGE
+      return 'A4';
+    case 6:  // AIRCRAFT_CATEGORY_HEAVY
+      return 'A5';
+    case 7:  // AIRCRAFT_CATEGORY_HIGH_PERFORMANCE
+      return 'A6';
+    case 8:  // AIRCRAFT_CATEGORY_ROTORCRAFT
+      return 'A7';
+    case 9:  // AIRCRAFT_CATEGORY_GLIDER
+      return 'B1';
+    case 10: // AIRCRAFT_CATEGORY_LIGHTER_THAN_AIR
+      return 'B2';
+    case 13: // AIRCRAFT_CATEGORY_UAV
+      return 'B3';
+    case 12: // AIRCRAFT_CATEGORY_ULTRALIGHT
+      return 'B6';
+    case 14: // AIRCRAFT_CATEGORY_SPACE
+      return 'B5';
+    case 0:  // AIRCRAFT_CATEGORY_UNKNOWN
+    case 1:  // AIRCRAFT_CATEGORY_NO_INFO
+    default:
+      return 'default';
+  }
+}
+
 // Map of aircraft categories to their SVG file paths
 const ICON_PATH_MAP: Record<AircraftCategory, string> = {
   A1: '/src/assets/icons/aircraft-a1-light.svg',
@@ -189,14 +228,25 @@ export function createSvgElement(svgContent: string, fillColor: string = '250, 2
 }
 
 /**
- * Update the fill color of an SVG element
+ * Update the fill and stroke color of an SVG element
  */
 export function updateSvgColor(svgElement: SVGElement, fillColor: string): void {
+  // Update fill attributes
   const fillableElements = svgElement.querySelectorAll('[fill]');
   fillableElements.forEach(element => {
     const currentFill = element.getAttribute('fill');
     if (currentFill && currentFill !== 'none' && !currentFill.includes('url(')) {
       element.setAttribute('fill', `rgb(${fillColor})`);
+    }
+  });
+
+  // Update stroke attributes (but preserve black strokes for outlines)
+  const strokeElements = svgElement.querySelectorAll('[stroke]');
+  strokeElements.forEach(element => {
+    const currentStroke = element.getAttribute('stroke');
+    // Update stroke colors that aren't black (black is used for outlines)
+    if (currentStroke && currentStroke !== 'black' && !currentStroke.includes('url(')) {
+      element.setAttribute('stroke', `rgb(${fillColor})`);
     }
   });
 }

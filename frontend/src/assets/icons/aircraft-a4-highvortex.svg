@@ -1,20 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px" viewBox="0 0 15 20">
-  <!-- A4: High Vortex Aircraft (e.g., B757) - Distinctive wingtip design -->
-  <g fill="rgb(250, 255, 255)" stroke="black" stroke-width="0.8">
-    <!-- Fuselage (narrow body) -->
-    <path d="M 7.5,0 L 9,6 L 9,14.5 L 7.5,16.5 L 6,14.5 L 6,6 Z" />
-    <!-- Wings with emphasized wingtips -->
-    <path d="M 0.5,7.5 L 6,7 L 6,10 L 1.5,10.5 L 0.5,9.5 Z" />
-    <path d="M 14.5,7.5 L 9,7 L 9,10 L 13.5,10.5 L 14.5,9.5 Z" />
-    <!-- Wingtip vortex indicators (winglets) -->
-    <path d="M 0.5,7.5 L 0,6.5 L 1,7" stroke-width="1" />
-    <path d="M 14.5,7.5 L 15,6.5 L 14,7" stroke-width="1" />
-    <!-- Underwing engines -->
-    <ellipse cx="3" cy="9" rx="1.2" ry="2.2" />
-    <ellipse cx="12" cy="9" rx="1.2" ry="2.2" />
-    <!-- Horizontal stabilizer -->
-    <rect x="4.5" y="14.5" width="6" height="1.5" />
-    <!-- Vertical stabilizer -->
-    <path d="M 6.5,14.5 L 7.5,19.5 L 8.5,14.5 Z" />
+<svg width="19.24px" height="22.5px" viewBox="0 0 95.515289 111.80084" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(-60.845123,-87.038729)">
+    <path d="m 86.469485,145.67604 h -7.246056 v -12.16378 h 7.246056 v 12.16378" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.135;stroke-dasharray:none;stroke-opacity:1" />
+    <path d="m 137.9821,145.67604 h -7.24606 v -12.16378 h 7.24606 v 12.16378" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.135;stroke-dasharray:none;stroke-opacity:1" />
+    <path d="m 155.29291,165.13879 v -8.93939 l -38.73853,-28.57853 c 0.11641,-7.53181 0.10583,-15.15181 -0.13053,-22.91997 -0.43392,-9.175754 -3.98992,-16.594671 -7.82109,-16.594671 -3.83116,0 -7.38716,7.418917 -7.82108,16.594671 -0.23636,7.76816 -0.24694,15.38816 -0.127,22.91997 L 61.912623,156.1994 v 8.93939 l 39.373527,-16.2172 c 0.49389,12.08617 1.09714,24.06298 1.53459,36.10681 l -11.987393,6.63575 v 5.9055 l 17.769413,-3.10091 17.76942,3.10091 v -5.9055 l -11.98386,-6.63575 c 0.43392,-12.04383 1.03364,-24.02064 1.53106,-36.10681 l 39.37353,16.2172" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.135;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>
